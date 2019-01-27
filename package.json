@@ -1,5 +1,5 @@
 {
-  "name": "Hacker-News-Copy",
+  "name": "hacker-news-copy",
   "version": "1.0.0",
   "description": "news",
   "main": "server.js",
@@ -27,5 +27,13 @@
   },
   "devDependencies": {
     "nodemon": "^1.17.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RMCoder198/Hacker-News-Copy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RMCoder198/Hacker-News-Copy/issues"
+  },
+  "homepage": "https://github.com/RMCoder198/Hacker-News-Copy#readme"
 }
