@@ -18,7 +18,7 @@ class Dashboard extends Component {
     var flag =0;
     const self = this;
      let url =
-      "http://hn.algolia.com/api/v1/search?query=&tags=story&page=" +
+      "https://hn.algolia.com/api/v1/search?query=&tags=story&page=" +
       this.state.page;
     const token  = localStorage.getItem('jwtToken');
      axios.defaults.headers.common['Authorization'] = token;
@@ -61,7 +61,7 @@ class Dashboard extends Component {
     this.setState({search:e.target.value});
     const self = this;
     let url =
-      "http://hn.algolia.com/api/v1/search?query="+e.target.value+"&tags=story";
+      "https://hn.algolia.com/api/v1/search?query="+e.target.value+"&tags=story";
     axios
       .get(url)
       .then(function(response) {
@@ -86,7 +86,7 @@ class Dashboard extends Component {
     this.setState({ page: pageNo });
   
     let url =
-      "http://hn.algolia.com/api/v1/search?query=&tags=story&page=" +
+      "https://hn.algolia.com/api/v1/search?query=&tags=story&page=" +
       pageNo;
     axios
       .get(url)
@@ -108,19 +108,19 @@ filterShow(e){
       const self = this;
  if(e.target.value == "date"){
      url =
-      "http://hn.algolia.com/api/v1/search_by_date?query=&tags=story&page=0" ;
+      "https://hn.algolia.com/api/v1/search_by_date?query=&tags=story&page=0" ;
     }
      if(e.target.value == "popularity"){
      url =
-      "http://hn.algolia.com/api/v1/search?query=&tags=story&page=0" ;
+      "https://hn.algolia.com/api/v1/search?query=&tags=story&page=0" ;
     }
       if(e.target.value == "stories"){
      url =
-      "http://hn.algolia.com/api/v1/search?query=&tags=story&page=0" ;
+      "https://hn.algolia.com/api/v1/search?query=&tags=story&page=0" ;
     }
       if(e.target.value == "comment"){
      url =
-      "http://hn.algolia.com/api/v1/search?query=&tags=comment&page=0" ;
+      "https://hn.algolia.com/api/v1/search?query=&tags=comment&page=0" ;
     }
 
 
@@ -144,7 +144,7 @@ filterShow(e){
 removeSearch(e){
 	 const self =this;
 	 let url =
-      "http://hn.algolia.com/api/v1/search?query=&tags=story&page=0";
+      "https://hn.algolia.com/api/v1/search?query=&tags=story&page=0";
 	this.setState({search:''});
 	axios
 			      .get(url)
