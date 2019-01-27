@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
-mongoose.connect(db,{ useNewUrlParser: true }).then(()=> console.log("mongodb connected")).catch( err => console.log(err));
+mongoose.connect("	mongodb://rahul:rahul123@ds031982.mlab.com:31982/algolia",{ useNewUrlParser: true }).then(()=> console.log("mongodb connected")).catch( err => console.log(err));
 { useNewUrlParser: true }
 //passport middleware
 
