@@ -111,6 +111,8 @@ class Login extends Component {
         </fieldset>
   </div>
   <div className="panel-footer pull-right">
+                      <a href="/" >Want to register? Register in here.</a>
+
             <button className="btn btn-success" onClick={this.handleClick}>
             Login
           </button>
