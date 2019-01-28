@@ -4,7 +4,7 @@ import List from "./List";
 import Logout from "./Logout";
 import jwt_decode from "jwt-decode";
 import { Record, History } from "../utils/RecordHistory";
- import Loader from 'react-loader-spinner'
+ import Loader from 'react-loader-spinner';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -87,7 +87,7 @@ class Dashboard extends Component {
           .catch(function(error) {
             console.log(error);
           });
-      }, 1500)
+      }, 1000)
     });
   }
   pageChange(e) {
@@ -176,6 +176,7 @@ class Dashboard extends Component {
     }
     else{
     return (
+      
       <div className="container">
 
     
@@ -219,7 +220,7 @@ class Dashboard extends Component {
             </select>
           </span>
         </div>
-        <List items={this.state.content} />
+        <List items={this.state.content} word={this.state.search} />
         <center>
           <p className="bg-color">
             <button
@@ -241,6 +242,7 @@ class Dashboard extends Component {
           </p>
         </center>
       </div>
+  
     );
   }
   }

@@ -10,7 +10,7 @@ class Logout extends React.Component{
 onClick(e){
 
 	  localStorage.removeItem('jwtToken');
-    localStorage.removeItem('hiso');
+      localStorage.removeItem('history');
 
 }
 
