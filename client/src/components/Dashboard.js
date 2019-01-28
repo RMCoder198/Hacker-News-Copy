@@ -87,7 +87,7 @@ class Dashboard extends Component {
           .catch(function(error) {
             console.log(error);
           });
-      }, 2000)
+      }, 1500)
     });
   }
   pageChange(e) {
@@ -177,7 +177,13 @@ class Dashboard extends Component {
     else{
     return (
       <div className="container">
+
+    
+
+
+
         <div className="bg-orange padding">
+                   
           <span className=" text-xl text-white">{this.state.username}</span>
           <span className=" ml-xl box" bg-white>
             <input

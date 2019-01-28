@@ -10,6 +10,8 @@ class Logout extends React.Component{
 onClick(e){
 
 	  localStorage.removeItem('jwtToken');
+    localStorage.removeItem('hiso');
+
 }
 
    render(){
@@ -17,7 +19,7 @@ onClick(e){
     return(
          <span>
 
-         <a href="/login" type="button" onClick={this.onClick} className="btn ml-lg">Log Out</a>
+         <a href="/login" type="button" onClick={this.onClick} className="btn pull-right">Log Out</a>
          </span>
     	);
 

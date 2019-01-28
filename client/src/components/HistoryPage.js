@@ -12,6 +12,7 @@ constructor(props){
 componentDidMount(){
 	this.setState({history:JSON.parse(localStorage.getItem("history"))});
 console.log(JSON.parse(localStorage.getItem("history")));
+
 }
 
 onClick(e){
@@ -20,7 +21,25 @@ console.log(JSON.parse(localStorage.getItem("history")));
 }
 
 render(){
-	return(
+    
+     if(this.state.history == null){
+     	return(
+        <div className="container">
+		  
+           <h1 className="display-4">You do not have any search history yet.</h1>
+		 
+		 
+		 
+		  
+		  <center >
+		  <button type="button" className="btn mt-lg" onClick={this.onClick.bind(this)}>Refresh</button>
+          </center>
+         
+        </div>
+		);
+     }
+    else{
+    	return(
         <div className="container">
 		  
            <h1 className="display-4">Last 5 Search History</h1>
@@ -48,7 +67,10 @@ render(){
           </center>
          
         </div>
-		);
+		);	
+    }
+
+
 }
 }
 
