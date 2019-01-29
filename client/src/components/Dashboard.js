@@ -364,6 +364,7 @@ class Dashboard extends Component {
               >
                 Next
               </button>
+              <span className="pull-right"> Page No. {this.state.page+1}</span>
             </p>
           </center>
         </div>
