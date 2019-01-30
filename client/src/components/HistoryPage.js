@@ -11,13 +11,13 @@ constructor(props){
 
 componentDidMount(){
 	this.setState({history:JSON.parse(localStorage.getItem("history"))});
-console.log(JSON.parse(localStorage.getItem("history")));
+// console.log(JSON.parse(localStorage.getItem("history")));
 
 }
 
 onClick(e){
 		this.setState({history:JSON.parse(localStorage.getItem("history"))});
-console.log(JSON.parse(localStorage.getItem("history")));
+// console.log(JSON.parse(localStorage.getItem("history")));
 }
 
 render(){

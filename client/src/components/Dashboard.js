@@ -3,7 +3,7 @@ import axios from "axios";
 import List from "./List";
 import Logout from "./Logout";
 import jwt_decode from "jwt-decode";
-import { Record, History } from "../utils/RecordHistory";
+import  Record from "../utils/RecordHistory";
 import Loader from "react-loader-spinner";
 
 class Dashboard extends Component {
@@ -83,8 +83,6 @@ class Dashboard extends Component {
           self.state.filter[2];
         if (self.state.search != "") {
           Record(self.state.search);
-          console.log(History[0].word);
-          localStorage.setItem("history", JSON.stringify(History));
         }
         axios
           .get(url)
@@ -290,7 +288,8 @@ class Dashboard extends Component {
       );
     } else {
       return (
-        <div className="container">
+         <div>
+         <div className="fixed-top header">
           <div className="bg-orange padding">
             <span className=" text-xl text-white">{this.state.username}</span>
             <span className=" ml-xl box" bg-white>
@@ -310,7 +309,7 @@ class Dashboard extends Component {
               <Logout />
             </span>
           </div>
-          <div>
+          <div className="bg-white">
             <span>
               search{" "}
               <select onChange={this.filterShow.bind(this)}>
@@ -344,10 +343,14 @@ class Dashboard extends Component {
               </p>
             </span>
           </div>
-
+          </div>
+        <div className="content">
+       
+          
           <List items={this.state.content} word={this.state.search} />
+          
           <center>
-            <p className="bg-color">
+            <p className="footer">
               <button
                 type="button"
                 className="btn"
@@ -367,6 +370,7 @@ class Dashboard extends Component {
               <span className="pull-right"> Page No. {this.state.page+1}</span>
             </p>
           </center>
+        </div>
         </div>
       );
     }

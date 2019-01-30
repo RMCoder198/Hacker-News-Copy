@@ -3,7 +3,7 @@ import TimeDifference from "../utils/TimeDifference";
  import Highlight from 'react-highlighter';
 
 const List = props => (
-  <div className="bg-color">
+  <div className="data">
    
     {props.items.map((item, index) => (
 
