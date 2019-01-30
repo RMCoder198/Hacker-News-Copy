@@ -3,7 +3,7 @@ import axios from "axios";
 import List from "./List";
 import Logout from "./Logout";
 import jwt_decode from "jwt-decode";
-import  Record from "../utils/RecordHistory";
+import Record from "../utils/RecordHistory";
 import Loader from "react-loader-spinner";
 
 class Dashboard extends Component {
@@ -15,7 +15,7 @@ class Dashboard extends Component {
       search: "",
       username: "",
       typingTimeout: 0,
-      load: false,
+      load: true,
       filter: ["search", "story", 0],
       result: 0,
       processTime: 0
@@ -28,38 +28,48 @@ class Dashboard extends Component {
       "https://hn.algolia.com/api/v1/search?query=&tags=story&page=" +
       this.state.page +
       "&numericFilters=created_at_i>0";
-    const token = localStorage.getItem("jwtToken");
-    axios.defaults.headers.common["Authorization"] = token;
-    const decoded = jwt_decode(token);
 
-    axios
-      .get("/api/users/current")
-      .then(function(response) {
-        if (response.data.status == true) {
-          self.setState({ load: true });
-          delete axios.defaults.headers.common["Authorization"];
-          axios
-            .get(url)
-            .then(function(response) {
-              return response;
-            })
-            .then(function(response) {
-              self.setState({
-                content: response.data.hits,
-                username: decoded.name,
-                result: response.data.nbHits,
-                processTime: response.data.processingTimeMS
+    if (localStorage.getItem("jwtToken") == null) {
+      self.props.history.push("./login");
+    } else {
+      const token = localStorage.getItem("jwtToken");
+
+      axios.defaults.headers.common["Authorization"] = token;
+
+      const decoded = jwt_decode(token);
+      axios
+        .get("/api/users/current")
+        .then(function(response) {
+          if (response.data.status == true) {
+            delete axios.defaults.headers.common["Authorization"];
+            axios
+              .get(url)
+              .then(function(response) {
+                return response;
+              })
+              .then(function(response) {
+                self.setState({
+                  load:false,
+                  content: response.data.hits,
+                  username: decoded.name,
+                  result: response.data.nbHits,
+                  processTime: response.data.processingTimeMS
+                });
+              })
+              .catch(function(error) {
+                console.log(error);
               });
-            })
-            .catch(function(error) {
-              console.log(error);
-            });
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-        self.props.history.push("./error");
-      });
+          }
+      delete axios.defaults.headers.common["Authorization"];
+
+        })
+        .catch(function(error) {
+     delete axios.defaults.headers.common["Authorization"];
+
+          console.log(error);
+          self.props.history.push("./error");
+        });
+    }
   }
 
   onChange(e) {
@@ -278,7 +288,7 @@ class Dashboard extends Component {
       });
   }
   render() {
-    if (this.state.load === false) {
+    if (this.state.load === true) {
       return (
         <center>
           <div className="mt-lg">
@@ -288,89 +298,90 @@ class Dashboard extends Component {
       );
     } else {
       return (
-         <div>
-         <div className="fixed-top header">
-          <div className="bg-orange padding">
-            <span className=" text-xl text-white">{this.state.username}</span>
-            <span className=" ml-xl box" bg-white>
-              <input
-                type="text"
-                className="input-width input-search"
-                name="query"
-                value={this.state.search}
-                onChange={this.onChange.bind(this)}
-              />
-              <a className="dot" onClick={this.removeSearch.bind(this)} />
-            </span>
-            <span className="text-white ml-sm">
-              <a href="/history">Go To Search History</a>
-            </span>
-            <span>
-              <Logout />
-            </span>
+        <div>
+          <div className="fixed-top">
+            <div className="bg-orange padding">
+              <span className=" text-xl text-white">{this.state.username}</span>
+              <span className="  box" bg-white>
+                <input
+                  type="text"
+                  className="input-width input-search"
+                  name="query"
+                  value={this.state.search}
+                  onChange={this.onChange.bind(this)}
+                />
+                <a className="dot" onClick={this.removeSearch.bind(this)} />
+              </span>
+              <span className="text-white ml-sm">
+                <a href="/history">Go To Search History</a>
+              </span>
+              <span>
+                <Logout />
+              </span>
+            </div>
+            <div className="bg-white">
+              <span>
+                search{" "}
+                <select onChange={this.filterShow.bind(this)}>
+                  <option value="stories">stories</option>
+                  <option value="comments">comments</option>
+                </select>
+              </span>
+              <span>
+                {" "}
+                by{" "}
+                <select onChange={this.filterShow.bind(this)}>
+                  <option value="popularity">popularity</option>
+                  <option value="date">date</option>
+                </select>
+              </span>
+              <span>
+                {" "}
+                for{" "}
+                <select onChange={this.filterShow.bind(this)}>
+                  <option value="all">All time</option>
+                  <option value="24h">Last 24h</option>
+                  <option value="week">Last Week</option>
+                  <option value="month">Last Month</option>
+                  <option value="year">Last Year</option>
+                </select>
+              </span>
+              <span>
+                <p className="pull-right">
+                  {this.state.result} results ({this.state.processTime / 1000}{" "}
+                  seconds)
+                </p>
+              </span>
+            </div>
           </div>
-          <div className="bg-white">
-            <span>
-              search{" "}
-              <select onChange={this.filterShow.bind(this)}>
-                <option value="stories">stories</option>
-                <option value="comments">comments</option>
-              </select>
-            </span>
-            <span>
-              {" "}
-              by{" "}
-              <select onChange={this.filterShow.bind(this)}>
-                <option value="popularity">popularity</option>
-                <option value="date">date</option>
-              </select>
-            </span>
-            <span>
-              {" "}
-              for{" "}
-              <select onChange={this.filterShow.bind(this)}>
-                <option value="all">All time</option>
-                <option value="24h">Last 24h</option>
-                <option value="week">Last Week</option>
-                <option value="month">Last Month</option>
-                <option value="year">Last Year</option>
-              </select>
-            </span>
-            <span>
-              <p className="pull-right">
-                {this.state.result} results ({this.state.processTime / 1000}{" "}
-                seconds)
+          <div className="content">
+            <List items={this.state.content} word={this.state.search} />
+
+            <center>
+              <p className="footer">
+                <button
+                  type="button"
+                  className="btn"
+                  value="-1"
+                  onClick={this.pageChange.bind(this)}
+                >
+                  Pre
+                </button>
+                <button
+                  type="button"
+                  className="btn"
+                  value="1"
+                  onClick={this.pageChange.bind(this)}
+                >
+                  Next
+                </button>
+                <span className="pull-right">
+                  {" "}
+                  Page No. {this.state.page + 1}
+                </span>
               </p>
-            </span>
+            </center>
           </div>
-          </div>
-        <div className="content">
-       
-          
-          <List items={this.state.content} word={this.state.search} />
-          
-          <center>
-            <p className="footer">
-              <button
-                type="button"
-                className="btn"
-                value="-1"
-                onClick={this.pageChange.bind(this)}
-              >
-                Pre
-              </button>
-              <button
-                type="button"
-                className="btn"
-                value="1"
-                onClick={this.pageChange.bind(this)}
-              >
-                Next
-              </button>
-              <span className="pull-right"> Page No. {this.state.page+1}</span>
-            </p>
-          </center>
-        </div>
         </div>
       );
     }

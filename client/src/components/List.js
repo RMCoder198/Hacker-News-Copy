@@ -3,13 +3,13 @@ import TimeDifference from "../utils/TimeDifference";
  import Highlight from 'react-highlighter';
 
 const List = props => (
-  <div className="data">
+  <div className="data pl-sm">
    
     {props.items.map((item, index) => (
 
-      <a key={index} href={item.url}>
-        <p><Highlight search={props.word}>
-        {item.title} 
+      <a key={index} href={item.url} >
+        <p> <Highlight search={props.word}>
+          {item.title} 
               </Highlight>
          <Highlight search={props.word}>
         {item.story_title}

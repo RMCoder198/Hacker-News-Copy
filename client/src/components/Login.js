@@ -12,21 +12,27 @@ class Login extends Component {
   }
   componentDidMount() {
     const self = this;
-    axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
+    if(localStorage.getItem('jwtToken') != null){
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
 
      axios.get('/api/users/current')
      .then(function(response){
       if(response.data.status === true){
-             
+         delete axios.defaults.headers.common["Authorization"];
+   
        self.props.history.push("/dashboard");
 
       }
              
+                 delete axios.defaults.headers.common["Authorization"];
 
      })
      .catch( function(error){
+                  delete axios.defaults.headers.common["Authorization"];
+
      }
       );
+   }
   }
 
 

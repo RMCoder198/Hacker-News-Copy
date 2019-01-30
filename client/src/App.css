@@ -1,5 +1,6 @@
-.centre{
+.center{
   position: absolute;
+ left:40%;
 }
 .text-xm{
   font-size:12px;
@@ -9,25 +10,46 @@
 .fixed-top{
   position: fixed;
   top: 0;
-   left:100px;
-right:100px;
+   left:8%;
+right:8%;
  
 
 
+}
+.pl-sm{
+  padding-left: 10px;
 }
 .content{
   
   margin-left: 8%;
   margin-right: 8%;
 }
-
+@media only screen and (max-width: 600px) {
+/*.data{
+  background-color: #F5F7EE;
+  margin-top: 24%;
+}*/
+.fixed-top{
+  position: fixed;
+ left:0; 
+ right: 0;
+ }
+.content{
+  
+  margin-left: 0;
+  margin-right: 0;
+}
+.box{
+  padding-bottom:  8px;
+  background-color: white;
+  padding-top: 15px;
+  padding-right: 5px;
+}
+}
 .ml-sm{
   margin-left: 10px;
 }
-.center{
-  margin-left: 40%;
-  margin-right: 40%;
-}
+
 .ml-lg{
 margin-left: 4%;
 }
@@ -40,19 +62,19 @@ margin-left: 4%;
   display: inline-block;
 }
 .box{
-  padding-bottom:  8px;
+  padding-bottom:  1%;
   background-color: white;
-  padding-top: 15px;
-  padding-right: 5px;
+  padding-top: 2%;
+  padding-right: 1%;
 }
 .padding{
-  padding: 20px;
+  padding: 2%;
 }
 .text-white{
   color: white;
 }
 .input-width{
-  width: 500px;
+  width: 50%;
 }
 .bg-orange{
 background-color: #FF6700;
